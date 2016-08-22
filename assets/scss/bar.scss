@@ -6,7 +6,7 @@ $mobile_max: 580px;
 	font-size: $base_size * 2.5;
 
 	// right side padding of 30px for close icon
-	.mctb-bar {
+	form {
 		padding: ($base_size * 1.25) ($base_size * 1.5);
 	}
 
@@ -62,9 +62,9 @@ $mobile_max: 580px;
 	}
 
 	form{
+        display: inline-block;
+        position: relative;
 		text-align: center;
-		margin: 0 !important;
-		padding: 0 !important;
 	}
 
 	label {
@@ -196,23 +196,11 @@ $mobile_max: 580px;
 
 .mctb-close{
 	display: inline-block;
-	float: right;
+    float: right;
+    right: 0;
 	margin-right: 12px;
 	cursor: pointer;
 	clear: both;
 	z-index: 10;
-}
-
-.mctb-icon-inside-bar {
-
-	&.mctb-position-bottom .mctb-bar {
-		position: absolute;
-		bottom: 0;
-	}
-
-		.mctb-close {
-		float: none;
-		position: absolute;
-		top: 0; right: 0;
-	}
+    position: relative;
 }

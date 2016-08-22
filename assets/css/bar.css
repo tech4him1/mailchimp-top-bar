@@ -24,9 +24,9 @@
     vertical-align: middle !important;
     width: auto; }
   #mailchimp-top-bar form {
-    text-align: center;
-    margin: 0 !important;
-    padding: 0 !important; }
+    display: inline-block;
+    position: relative;
+    text-align: center; }
   #mailchimp-top-bar label {
     margin: 0 6px 0 0; }
   #mailchimp-top-bar input,
@@ -49,7 +49,7 @@
     display: none !important; }
   #mailchimp-top-bar.mctb-small {
     font-size: 10px; }
-    #mailchimp-top-bar.mctb-small .mctb-bar {
+    #mailchimp-top-bar.mctb-small form {
       padding: 5px 6px; }
     #mailchimp-top-bar.mctb-small .mctb-button {
       padding: 4px 12px; }
@@ -65,7 +65,7 @@
       font-size: 16px; }
   #mailchimp-top-bar.mctb-medium {
     font-size: 12.5px; }
-    #mailchimp-top-bar.mctb-medium .mctb-bar {
+    #mailchimp-top-bar.mctb-medium form {
       padding: 6.25px 7.5px; }
     #mailchimp-top-bar.mctb-medium .mctb-button {
       padding: 5px 15px; }
@@ -81,7 +81,7 @@
       font-size: 20px; }
   #mailchimp-top-bar.mctb-big {
     font-size: 15px; }
-    #mailchimp-top-bar.mctb-big .mctb-bar {
+    #mailchimp-top-bar.mctb-big form {
       padding: 7.5px 9px; }
     #mailchimp-top-bar.mctb-big .mctb-button {
       padding: 6px 18px; }
@@ -157,17 +157,9 @@
 .mctb-close {
   display: inline-block;
   float: right;
+  right: 0;
   margin-right: 12px;
   cursor: pointer;
   clear: both;
-  z-index: 10; }
-
-.mctb-icon-inside-bar.mctb-position-bottom .mctb-bar {
-  position: absolute;
-  bottom: 0; }
-
-.mctb-icon-inside-bar .mctb-close {
-  float: none;
-  position: absolute;
-  top: 0;
-  right: 0; }
+  z-index: 10;
+  position: relative; }

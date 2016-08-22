@@ -7,6 +7,7 @@ function Bar( wrapperEl, config ) {
 
     // Vars & State
     var barEl = wrapperEl.querySelector('.mctb-bar');
+    var formEl = barEl.querySelector('form');
     var iconEl = document.createElement('span');
     var responseEl = wrapperEl.querySelector('.mctb-response');
     var visible = false,
@@ -37,7 +38,7 @@ function Bar( wrapperEl, config ) {
             wrapperEl.insertBefore( iconEl, barEl );
             originalBodyPadding = ( parseInt( document.body.style.paddingBottom )  || 0 );
         } else {
-            wrapperEl.insertBefore( iconEl, barEl.nextElementSibling );
+            barEl.appendChild( iconEl );
             originalBodyPadding = ( parseInt( document.body.style.paddingTop )  || 0 );
         }
 
@@ -57,22 +58,13 @@ function Bar( wrapperEl, config ) {
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
 
-        // would the close icon fit inside the bar?
-        var elementsWidth = 0;
-        for( var i=0; i<barEl.firstElementChild.children.length; i++ ) {
-            elementsWidth+= barEl.firstElementChild.children[i].clientWidth;
-        }
-        if( elementsWidth + iconEl.clientWidth + 200 < barEl.clientWidth ) {
-            wrapperEl.className += ' mctb-icon-inside-bar';
-
-            // since icon is now absolutely positioned, we need to set a min height
-            if( isBottomBar ) {
-                wrapperEl.style.minHeight = iconEl.clientHeight + "px";
-            }
+        // since icon can be absolutely positioned, we need to set a min height
+        if( isBottomBar ) {
+            wrapperEl.style.minHeight = iconEl.clientHeight + "px";
         }
 
         // hide bar again, we're done measuring
-        barEl.style.display = 'none';
+        formEl.style.display = 'none';
         barEl.style.position = origBarPosition;
 
         // Show the bar straight away?
@@ -94,7 +86,7 @@ function Bar( wrapperEl, config ) {
         
         if( manual ) {
             cookies.erase( 'mctb_bar_hidden' );
-            animator.toggle(barEl, "slide");
+            animator.toggle(formEl, "slide");
 
             // animate body padding
             var styles = {};
@@ -102,7 +94,7 @@ function Bar( wrapperEl, config ) {
             animator.animate(document.body, styles);
         } else {
             // Add bar height to <body> padding
-            barEl.style.display = 'block';
+            formEl.style.display = ''; // take away display: none;
             document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
         }
 
@@ -124,14 +116,14 @@ function Bar( wrapperEl, config ) {
 
         if( manual ) {
             cookies.create( "mctb_bar_hidden", 1, config.cookieLength );
-            animator.toggle(barEl, "slide");
+            animator.toggle(formEl, "slide");
 
             // animate body padding
             var styles = {};
             styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding;
             animator.animate(document.body, styles);
         } else {
-            barEl.style.display = 'none';
+            formEl.style.display = 'none';
             document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + "px";
         }
 
