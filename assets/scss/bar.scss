@@ -28,6 +28,7 @@ $mobile_max: 580px;
 	.mctb-close {
 		padding: ($base_size) ($base_size * 3);
 		font-size: $base_size * 4;
+        margin-left: $base_size * 8;
 	}
 }
 
@@ -83,10 +84,9 @@ $mobile_max: 580px;
 	}
 
 	.mctb-email {
-		width: 100%;
-
 		/* this is important because otherwise the field will stack horizontally */
-		max-width: 240px !important;
+		width: 240px;
+		max-width: 100% !important;
 	}
 
 	.mctb-button {
