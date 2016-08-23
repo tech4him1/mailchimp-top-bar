@@ -21,7 +21,11 @@ function Bar( wrapperEl, config ) {
 
     function init() {
 
-
+        if ( ! isBottomBar ) {
+            // move bar to top of body
+            var firstBodyEl = document.body.firstChild;
+            document.body.insertBefore(barEl.parentNode, firstBodyEl);
+        }
 
         // remove "no_js" field
         var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
@@ -58,11 +62,6 @@ function Bar( wrapperEl, config ) {
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
 
-        // since icon can be absolutely positioned, we need to set a min height
-        if( isBottomBar ) {
-            wrapperEl.style.minHeight = iconEl.clientHeight + "px";
-        }
-
         // hide bar again, we're done measuring
         formEl.style.display = 'none';
         barEl.style.position = origBarPosition;
@@ -87,15 +86,8 @@ function Bar( wrapperEl, config ) {
         if( manual ) {
             cookies.erase( 'mctb_bar_hidden' );
             animator.toggle(formEl, "slide");
-
-            // animate body padding
-            var styles = {};
-            styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
-            animator.animate(document.body, styles);
         } else {
-            // Add bar height to <body> padding
             formEl.style.display = ''; // take away display: none;
-            document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
         }
 
         iconEl.innerHTML = config.icons.hide;
@@ -117,14 +109,8 @@ function Bar( wrapperEl, config ) {
         if( manual ) {
             cookies.create( "mctb_bar_hidden", 1, config.cookieLength );
             animator.toggle(formEl, "slide");
-
-            // animate body padding
-            var styles = {};
-            styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding;
-            animator.animate(document.body, styles);
         } else {
             formEl.style.display = 'none';
-            document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + "px";
         }
 
         visible = false;

@@ -112,14 +112,9 @@
   /* make sure z-index is slightly below that of admin bar (for dropdown items) */ }
   .admin-bar .mctb {
     z-index: 99998; }
-  .admin-bar .mctb-position-top {
-    top: 32px; }
-    @media screen and (max-width: 782px) {
-      .admin-bar .mctb-position-top {
-        top: 46px; } }
 
 .mctb {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -136,10 +131,11 @@
   box-sizing: border-box !important; }
 
 .mctb-sticky {
-  position: fixed; }
+  position: sticky;
+  top: 0; }
 
 .mctb-position-bottom {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   top: auto; }
   .mctb-position-bottom .mctb-bar {
