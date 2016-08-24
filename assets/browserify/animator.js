@@ -37,8 +37,9 @@ function animated(element) {
  *
  * @param element
  * @param animation Either "fade" or "slide"
+ * @param fn Callback
  */
-function toggle(element, animation) {
+function toggle(element, animation, fn) {
     var nowVisible = element.style.display != 'none' || element.offsetLeft > 0;
 
     // create clone for reference
@@ -47,6 +48,9 @@ function toggle(element, animation) {
         element.removeAttribute('data-animated');
         element.setAttribute('style', clone.getAttribute('style'));
         element.style.display = nowVisible ? 'none' : '';
+        
+        // call callback
+        fn && fn();
     };
 
     // store attribute so everyone knows we're animating this element
