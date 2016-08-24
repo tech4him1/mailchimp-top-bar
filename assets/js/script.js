@@ -292,7 +292,11 @@ function Bar( wrapperEl, config ) {
         
         if( manual ) {
             cookies.erase( 'mctb_bar_hidden' );
-            animator.toggle(barEl, "slide");
+            animator.toggle(barEl, "slide", function(){
+                calculateDimensions();
+                // reset body padding
+                document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
+            }); // callback will recaculate heights in case window has been resized
 
             // animate body padding
             var styles = {};
