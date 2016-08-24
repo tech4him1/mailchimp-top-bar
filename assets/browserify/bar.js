@@ -21,50 +21,28 @@ function Bar( wrapperEl, config ) {
 
     function init() {
 
+        // remove "no_js" field
+        var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
+        noJsField.parentElement.removeChild(noJsField);
+
         if ( ! isBottomBar ) {
             // move bar to top of body
             var firstBodyEl = document.body.firstChild;
             document.body.insertBefore(barEl.parentNode, firstBodyEl);
         }
-
-        // remove "no_js" field
-        var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
-        noJsField.parentElement.removeChild(noJsField);
-
-        // calculate real bar height
-        var origBarPosition = barEl.style.position;
-        barEl.style.display = 'block';
-        barEl.style.position = 'relative';
-        barHeight = barEl.clientHeight;
-
-        // save original bodyPadding
-        if( isBottomBar ) {
-            wrapperEl.insertBefore( iconEl, barEl );
-            originalBodyPadding = ( parseInt( document.body.style.paddingBottom )  || 0 );
-        } else {
-            barEl.appendChild( iconEl );
-            originalBodyPadding = ( parseInt( document.body.style.paddingTop )  || 0 );
-        }
-
-        // get real bar height (if it were shown)
-        bodyPadding = ( originalBodyPadding + barHeight ) + "px";
-
+        
         // fade response 4 seconds after showing bar
         window.setTimeout(fadeResponse, 4000);
 
-        // fix response height
-        if( responseEl ) {
-            responseEl.style.lineHeight = barHeight + "px";
-        }
-
         // configure icon
+        if( isBottomBar ) {
+            wrapperEl.insertBefore( iconEl, barEl );
+        } else {
+            barEl.appendChild( iconEl );
+        }
         iconEl.setAttribute('class', 'mctb-close');
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
-
-        // hide bar again, we're done measuring
-        formEl.style.display = 'none';
-        barEl.style.position = origBarPosition;
 
         // Show the bar straight away?
         if( cookies.read( "mctb_bar_hidden" ) != 1 ) {
