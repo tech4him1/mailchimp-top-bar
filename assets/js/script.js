@@ -226,7 +226,17 @@ function Bar( wrapperEl, config ) {
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
 
+        // make sure bar is visible
+        var origBarPosition = barEl.style.position;
+        var origBarDisplay = barEl.style.display;
+        barEl.style.display = 'block';
+        barEl.style.position = 'relative';
+
         calculateDimensions();
+
+        // reset bar again, we're done measuring
+        barEl.style.display = origBarDisplay;
+        barEl.style.position = origBarPosition;
 
         // Show the bar straight away?
         if( cookies.read( "mctb_bar_hidden" ) != 1 ) {
@@ -245,13 +255,6 @@ function Bar( wrapperEl, config ) {
     }
 
     function calculateDimensions() {
-
-        // make sure bar is visible
-        var origBarPosition = barEl.style.position;
-        var origBarDisplay = barEl.style.display;
-        barEl.style.display = 'block';
-        barEl.style.position = 'relative';
-
         // calculate real bar height
         barHeight = barEl.clientHeight;
 
@@ -273,10 +276,6 @@ function Bar( wrapperEl, config ) {
                 wrapperEl.style.minHeight = iconEl.clientHeight + "px";
             }
         }
-
-        // reset bar again, we're done measuring
-        barEl.style.display = origBarDisplay;
-        barEl.style.position = origBarPosition;
     }
 
     /**
