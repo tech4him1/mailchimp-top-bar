@@ -31,6 +31,11 @@ function Bar( wrapperEl, config ) {
             document.body.insertBefore(barEl.parentNode, firstBodyEl);
         }
         
+        // add polyfill for sticky bar
+        if (wrapperEl.classList.contains('mctb-sticky')) {
+            jQuery(wrapperEl).fixedsticky();
+        }
+        
         // fade response 4 seconds after showing bar
         window.setTimeout(fadeResponse, 4000);
 

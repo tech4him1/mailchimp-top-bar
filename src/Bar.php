@@ -296,6 +296,8 @@ class Bar {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
+		wp_enqueue_style( 'mailchimp-top-bar_fixedsticky', $this->asset_url( "/inc/fixedsticky.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
+		wp_enqueue_script( 'mailchimp-top-bar_fixedsticky', $this->asset_url( "/inc/fixedsticky.js" ), array('jquery'), MAILCHIMP_TOP_BAR_VERSION );
 
 		$bottom = ( $this->options->get( 'position' ) === 'bottom' );
 
@@ -336,7 +338,7 @@ class Bar {
 
 		// add class when bar is sticky
 		if( $this->options->get( 'sticky' ) ) {
-			$classes[] = 'mctb-sticky';
+			$classes[] = 'mctb-sticky fixedsticky';
 		}
 
 		// add unique css class for position (bottom|top)
@@ -392,7 +394,7 @@ class Bar {
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- MailChimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-			<div class="mctb-bar" style="display: none">
+			<div class="mctb-bar">
 				<?php echo $this->get_response_message(); ?>
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
