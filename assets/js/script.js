@@ -231,7 +231,13 @@ function Bar( wrapperEl, config ) {
 
         // fade response 4 seconds after showing bar
         window.setTimeout(fadeResponse, 4000);
-        window.addEventListener('resize', throttle(calculateDimensions));
+        window.addEventListener('resize', throttle(function(){
+            calculateDimensions();
+            // reset body padding when visible.
+            if (visible) {
+                document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
+            }
+        }));
     }
 
     function calculateDimensions() {
