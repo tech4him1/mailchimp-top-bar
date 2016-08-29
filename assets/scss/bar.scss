@@ -7,12 +7,21 @@ $mobile_max: 580px;
 
 	// right side padding of 30px for close icon
 	.mctb-bar {
-		padding: ($base_size * 1.25) ($base_size * 1.5);
+		padding: ($base_size * 0.65) ($base_size * 1.5);
 	}
 
 	.mctb-button {
 		padding: $base_size ($base_size * 3);
 	}
+    
+	input,
+	input[type="text"],
+	input[type="email"],
+	.mctb-email,
+	.mctb-button{
+        margin-top: ($base_size * 0.6);
+        margin-bottom: ($base_size * 0.6);
+    }
 
 	input,
 	.mctb-email,
@@ -124,10 +133,8 @@ $mobile_max: 580px;
 		.mctb-label {
 			width: 100%;
 			max-width: 100% !important;
-		}
-
-		.mctb-email {
-			margin: 6px 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
 		}
 	}
 }
