@@ -79,11 +79,19 @@ $tablet_max: 860px;
 	input[type="email"],
 	.mctb-email,
 	.mctb-button{
-		margin: 0 0 0 6px;
+		margin: 6px 0 0 6px;
 		border: 1px solid white;
 		background: white;
 		height: auto;
 	}
+    
+    .mctb-bar {
+        margin-top: -6px;
+    }
+    
+    .mctb-label {
+        margin-top: 0;
+    }
 
 	.mctb-email {
 		width: 100%;
@@ -141,7 +149,7 @@ $tablet_max: 860px;
 		&.multiple-input-fields {
 			.mctb-label {
 				display: block !important;
-				margin: 0 0 6px;
+				margin: 0;
 			}
 		}
 	}
